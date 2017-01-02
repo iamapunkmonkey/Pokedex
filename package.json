@@ -1,4 +1,15 @@
 {
+  "name": "pokedex",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:iamapunkmonkey/Pokedex.git",
+  "author": "Zach Breman <zbreman@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --port 8666",
+    "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
+    "test:watch": "npm run test -- --watch"
+  },
   "devDependencies": {
     "axios-mock-adapter": "^1.7.1",
     "babel-core": "^6.21.0",
