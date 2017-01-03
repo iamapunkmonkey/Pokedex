@@ -7,7 +7,7 @@ export default class App extends Component {
     return (
       <div>
         <Navbar brand="Pokedex"/>
-        {this.props.children}
+        <PokemonCards/>
       </div>
     );
   }
