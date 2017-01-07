@@ -4,7 +4,7 @@ export default function({dispatch}){
       return next(action);
     
     action.payload.then(function(response){
-      const newAction = {...action, payload: response};
+      const newAction = {type: action.type, payload: response.data};
       dispatch(newAction);
     });
   }
