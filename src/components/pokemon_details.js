@@ -10,16 +10,37 @@ class PokemonDetails extends Component {
     this.props.fetchPokemon(this.props.params.id);
   }
 
-  renderDetails(){
-    if(!this.props.pokemon.species || 
+  renderDetails() {
+    if (!this.props.pokemon.species ||
       !this.props.pokemon.species.flavor_text)
-      return <p></p>
-    
+      return <p/>;
+
     return <p>{this.props.pokemon.species.flavor_text.flavor_text.replace('.', '. ')}</p>
   }
-  
+
+  renderStats() {
+    if (!this.props.pokemon.stats)
+      return <p/>;
+
+    return (
+      <ul>
+        {this.renderStat()}
+      </ul>
+    )
+  }
+
+  renderStat() {
+    return this.props.pokemon.stats.map((stat) => {
+      return (
+        <li>
+          {stat.stat.identifier} - {stat.base_stat}
+        </li>
+      )
+    });
+  }
+
   render() {
-    const sprite_path = "../../sprites/sprites/pokemon/" + this.props.pokemon.id + ".png";
+    const sprite_path = "../../sprites/sprites/pokemon/other-sprites/official-artwork/" + this.props.pokemon.id + ".png";
 
     return (
       <div id="pokemon-details">
@@ -28,6 +49,7 @@ class PokemonDetails extends Component {
             <img src={sprite_path}/>
             <h3>{this.props.pokemon.identifier}</h3>
             {this.renderDetails()}
+            {this.renderStats()}
           </Col>
         </Row>
       </div>
