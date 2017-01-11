@@ -15,13 +15,17 @@ module.exports = {
         presets: ['react', 'es2015', 'stage-1']
       }
     },
-    {
-      test: /\.json$/,
-      loader: 'json'
-    }]
+      {
+        test: /\.json$/,
+        loader: 'json'
+      },
+      {test: /\.css$/, loader: "style-loader!css-loader"}]
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx', '.css'],
+    modulesDirectories: [
+      'node_modules'
+    ]
   },
   devServer: {
     historyApiFallback: true,

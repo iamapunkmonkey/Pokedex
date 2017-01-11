@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Row, Col} from 'react-materialize';
+import {Progress} from 'antd';
 
 import * as actions from '../actions';
 import _ from 'lodash';
+import 'antd/dist/antd.css';
 
 class PokemonDetails extends Component {
   componentWillMount() {
@@ -12,14 +14,19 @@ class PokemonDetails extends Component {
 
   renderDetails() {
     if (!this.props.pokemon.species ||
-      !this.props.pokemon.species.flavor_text)
+      !this.props.pokemon.species.flavorText)
+      return <p/>;
+      
+    let flavor_text = _.filter(this.props.pokemon.species.flavorText, function(obj) { return obj.languageid == 9 && obj.versionid == 26 });
+    
+    if(!flavor_text)
       return <p/>;
 
-    return <p>{this.props.pokemon.species.flavor_text.flavor_text.replace('.', '. ')}</p>
+    return <p>{flavor_text[0].flavortext.replace('.', '. ')}</p>
   }
 
   renderStats() {
-    if (!this.props.pokemon.stats)
+    if (!this.props.pokemon.pokemonStats)
       return <p/>;
 
     return (
@@ -30,10 +37,13 @@ class PokemonDetails extends Component {
   }
 
   renderStat() {
-    return this.props.pokemon.stats.map((stat) => {
+    return this.props.pokemon.pokemonStats.map((stat) => {
+      let percent = _.ceil((parseInt(stat.basestat) / 255) * 100);
       return (
         <li>
-          {stat.stat.identifier} - {stat.base_stat}
+          {stat.stat.identifier} - {stat.basestat}
+          <br/>
+          <Progress percent={percent} showInfo={false} />
         </li>
       )
     });

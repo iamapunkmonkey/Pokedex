@@ -5,7 +5,7 @@ export default function (state = [], action) {
     case FETCH_POKEMON:
       return action.payload;
     case FETCH_POKEMON_DETAILS:
-      return action.payload[0];
+      return action.payload;
   }
   
   return state;
