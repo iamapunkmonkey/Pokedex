@@ -48,6 +48,17 @@ class PokemonDetails extends Component {
       )
     });
   }
+  
+  renderTypes(){
+    if (!this.props.pokemon.pokemonStats)
+      return <div/>;
+
+    return this.props.pokemon.pokemonTypes.map((type) => {
+      return (
+        <div>{type.type.identifier}</div>
+      )
+    });
+  }
 
   render() {
     const sprite_path = "../../sprites/sprites/pokemon/other-sprites/official-artwork/" + this.props.pokemon.id + ".png";
@@ -58,6 +69,7 @@ class PokemonDetails extends Component {
           <Col offset="l3" l={6} m={6} s={12}>
             <img src={sprite_path}/>
             <h3>{this.props.pokemon.identifier}</h3>
+            {this.renderTypes()}
             {this.renderDetails()}
             {this.renderStats()}
           </Col>
